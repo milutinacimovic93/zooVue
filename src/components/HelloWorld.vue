@@ -1,6 +1,15 @@
 <template>
   <div>
     <h1>Animals</h1>
+    <form @submit.prevent="addNewAnimal">
+        <label for="species">Species:</label>
+        <input class="form-control" name="species" type="text" v-model="newAnimal.species"/>
+        <label for="name">Name:</label>
+        <input class="form-control" name="name" type="text" v-model="newAnimal.name"/>
+        <label for="dateOfBirth">Date of birth:</label>
+        <input class="form-control" name="dateOfBirth" type="text" v-model="newAnimal.dateOfBirth"/>
+        <button class="submit">Add Animal</button>
+    </form>
     <table>
       <thead>
         <tr>
@@ -16,6 +25,7 @@
           <td>{{ animal.dateOfBirth ? animal.dateOfBirth : 'Unknown' }}</td>
           <td class="text-right">
             <button class="btn btn-danger btn-sm" @click="remove(animal)">Remove</button>
+            <button class="btn btn-danger btn-sm" @click="moveToTop(animal)">Move to top</button>
           </td>
         </tr>
       </tbody>
@@ -63,13 +73,26 @@
             dateOfBirth: '',
           }
         ],
+        newAnimal: {
+
+       }
       };
     },
     methods: {
       remove(animal) {
         const index = this.animals.indexOf(animal);
         this.animals.splice(index, 1);
-      }
+      },
+
+      moveToTop(animal) {
+        this.remove.animal;
+        this.animals.unshift(animal);
+      },
+
+      addNewAnimal() {
+        this.animals.push(this.newAnimal)
+        this.newAnimal = {};
+      },
     }
   };
 </script>
